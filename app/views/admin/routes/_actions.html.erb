@@ -1,0 +1,25 @@
+<ul>
+  <% if Admin::RoutesController.searchable? %>
+    <li>
+      <%= render :partial => "/shared/admin/search",
+                  :locals => {
+                    :url => admin_routes_url
+                  } %>
+    </li>
+  <% end unless action_name == 'redirections' %>
+  <li>
+    <% type = action_name == 'redirections' ? 'redirection' : 'route' %>
+    <%= link_to t(".create_new_#{type}"), new_admin_route_url(:route_locale => @current_locale, :dialog => true, :type => type),
+                 :class => "add_icon" %>
+  </li>
+  <%= render 'locale_filters' unless action_name == 'redirections' %>
+  <li>
+    <% if action_name == 'redirections' %>
+    <%= link_to t(".manage_routes"), admin_routes_url,
+                 :class => "edit_icon" %>
+    <% else %>
+    <%= link_to t(".manage_redirections"), redirections_admin_routes_url,
+                 :class => "edit_icon" %>
+    <% end %>
+  </li>
+</ul>

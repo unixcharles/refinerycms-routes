@@ -1,0 +1,7 @@
+<ul>
+  <% if action_name == 'redirections' %>
+    <%= render :partial => 'redirection', :collection => @routes %>
+  <% else %>
+    <%= render :partial => 'route', :collection => @routes %>
+  <% end %>
+</ul>

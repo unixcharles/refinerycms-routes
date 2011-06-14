@@ -1,0 +1,22 @@
+<% if searching? %>
+  <h2><%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %></h2>
+<% end %>
+<% if @routes.any? %>
+  <div class='pagination_container'>
+    <%= render :partial => 'routes' %>
+  </div>
+<% else %>
+  <p>
+    <% unless searching? %>
+      <strong>
+        <% if action_name == 'redirections' %>
+          <%= t('.no_redirections_yet') %>
+        <% else %>
+          <%= t('.no_routes_yet') %>
+        <% end %>
+      </strong>
+    <% else %>
+      <%= t('no_results', :scope => 'shared.admin.search') %>
+    <% end %>
+  </p>
+<% end %>

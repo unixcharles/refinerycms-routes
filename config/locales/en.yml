@@ -1,0 +1,24 @@
+en:
+  plugins:
+    refinerycms_routes:
+      title: Routes
+  admin:
+    routes:
+      actions:
+        create_new_route: Add New Route
+        create_new_redirection: Add New Redirection
+        manage_routes: Manage Routes
+        manage_redirections: Manage Redirections
+      locale_filters:
+        change_language: Change language
+      records:
+        title: Routes
+        sorry_no_results: Sorry! There are no results found.
+        no_items_yet: There are no Routes yet. Click "Add New Route" to add your first route.
+      route:
+        view_live_html: View this route live <br/><em>(opens in a new window)</em>
+        edit: Edit this route
+        delete: Remove this route forever
+  routes:
+    show:
+      other: Other Routes

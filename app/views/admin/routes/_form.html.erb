@@ -1,0 +1,56 @@
+<%= form_for [:admin, @route] do |f| -%>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @route,
+          :include_object_name => true
+        } %>
+
+  <%= hidden_field_tag 'type', params[:type] -%>
+
+  <div class='url-field'>
+    <%= f.label :url, "#{request.protocol}#{request.domain}/" -%>
+    <%= f.text_field :url -%>
+  </div>
+
+  <% if defined?(::Refinery::I18n) and ::Refinery::I18n.enabled? and params[:type] == 'route' %>
+  <div class='field'>
+    <%= f.label :locale -%>
+    <%= f.select :locale, ::Refinery::I18n.locales.reject {|locale, title| !@locales.include?( locale ) }.invert, :selected => @current_locale -%>
+  </div>
+  <% end %>
+
+  <%= hidden_field_tag 'route[redirect]', params[:type] == 'redirection' -%>
+
+  <div class='field'>
+    <%= f.label :target_id -%>
+    <% if params[:type] == 'route' %>
+    <%= f.select :target_id, @pages.map {|p| [p.title, p.id] } -%>
+    <% target_type = 'Page' %>
+    <% else %>
+    <%= f.select :target_id, grouped_options_for_select(@routes.group_by(&:locale).map {|locale, routes| [locale, routes.map { |r| [r.url, r.id] }] }) -%>
+    <% target_type = 'Route' %>
+    <% end %>
+    <%= hidden_field_tag 'route[target_type]', target_type -%>
+  </div>
+  
+  <%= render :partial => "/shared/admin/form_actions",
+              :locals => {
+                :f => f,
+                :continue_editing => false,
+                :delete_title => t('delete', :scope => 'admin.routes.route'),
+                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @route.url)
+              } %>
+<% end -%>
+
+<style type='text/css'>
+.url-field { border: 1px solid #7F9DB9; }
+.url-field label, .url-field input { padding: 5px; margin: 5px; }
+.url-field label { 
+  font-size: 1.4em;
+  clear:both; float:left; display:inline; 
+  margin-right: 1px; padding-right: 1px; }
+.url-field input { 
+  border: 0; 
+  margin-left: 1px; display:block; 
+  overflow: hidden; zoom:1; position:relative; 
+  font-weight: bold; font-size: 1.1em; }
+</style>
