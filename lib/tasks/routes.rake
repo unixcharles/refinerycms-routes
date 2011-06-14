@@ -2,11 +2,13 @@ namespace :refinery do
   
   namespace :routes do
     
-    # call this task my running: rake refinery:routes:my_task
-    # desc "Description of my task below"
-    # task :my_task => :environment do
-    #   # add your logic here
-    # end
+    desc "List custom routes"
+    task :list => :environment do
+      Route.order(:locale).all.each do |route|
+        route_type = route.redirect? ? 'Redirection' : 'Map'
+        puts %(GET | /#{route.url}    {#{route_type} => #{route.target.class} id: #{route.target.id} #{' locale: ' + route.locale unless route.redirect?}})
+      end
+    end
   
   end
   
