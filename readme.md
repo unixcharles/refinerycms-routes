@@ -1,6 +1,6 @@
 # Copywriting engine for Refinery CMS
 
-You want to move you website to Refinery CMS, but the SEO guy don't like the idea of loosing control of URL?
+You want to move your website to Refinery CMS, but the SEO guy don't like the idea of loosing control of URLs?
 
 Create your own custom routes for fine grained rules! Take the control of URLs and redirect legacy URLs.
 
