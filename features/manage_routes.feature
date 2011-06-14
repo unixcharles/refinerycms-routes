@@ -12,16 +12,16 @@ Feature: Routes
   Scenario: Routes List
    Given I have routes titled UniqueTitleOne, UniqueTitleTwo
    When I go to the list of routes
-   Then I should see "UniqueTitleOne"
-   And I should see "UniqueTitleTwo"
+   Then I should see "unique_one"
+   And I should see "unique_two"
 
   @routes-valid @valid
   Scenario: Create Valid Route
     When I go to the list of routes
     And I follow "Add New Route"
-    And I fill in "Url" with "This is a test of the first string field"
+    And I fill in "Url" with "a-first-url"
     And I press "Save"
-    Then I should see "'This is a test of the first string field' was successfully added."
+    Then I should see "'a-first-url' was successfully added."
     And I should have 1 route
 
   @routes-invalid @invalid
@@ -34,30 +34,30 @@ Feature: Routes
 
   @routes-edit @edit
   Scenario: Edit Existing Route
-    Given I have routes titled "A url"
+    Given I have routes titled "about-us"
     When I go to the list of routes
     And I follow "Edit this route" within ".actions"
-    Then I fill in "Url" with "A different url"
+    Then I fill in "Url" with "about"
     And I press "Save"
-    Then I should see "'A different url' was successfully updated."
+    Then I should see "'about' was successfully updated."
     And I should be on the list of routes
-    And I should not see "A url"
+    And I should not see "about-us"
 
   @routes-duplicate @duplicate
   Scenario: Create Duplicate Route
-    Given I only have routes titled UniqueTitleOne, UniqueTitleTwo
+    Given I only have routes titled uniqueone, uniquetwo
     When I go to the list of routes
     And I follow "Add New Route"
-    And I fill in "Url" with "UniqueTitleTwo"
+    And I fill in "Url" with "uniqueone"
     And I press "Save"
     Then I should see "There were problems"
     And I should have 2 routes
 
   @routes-delete @delete
   Scenario: Delete Route
-    Given I only have routes titled UniqueTitleOne
+    Given I only have routes titled uniqueone
     When I go to the list of routes
     And I follow "Remove this route forever"
-    Then I should see "'UniqueTitleOne' was successfully removed."
+    Then I should see "'uniqueone' was successfully removed."
     And I should have 0 routes
  
