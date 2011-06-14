@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = 'refinerycms-routes'
-  s.version           = '1.0.2'
+  s.version           = '1.0.3'
   s.description       = 'Custom routing for Refinery CMS'
   s.date              = '2011-06-14'
   s.author            = 'Charles Barbier'
