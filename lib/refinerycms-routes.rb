@@ -12,7 +12,7 @@ module Refinery
         ::ApplicationController.helper(RouterHelper)
 
         Page.module_eval do
-          has_many :routes, :dependent => :destroy
+          has_many :routes, :as => :target, :dependent => :destroy
         end
       end
 
